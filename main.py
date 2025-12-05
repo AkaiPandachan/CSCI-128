@@ -23,16 +23,19 @@ def get_perms(permissions_filename, program_name):
   
   with open(permissions_filename) as f:
     permissions = f.readlines()
+  for i in range(len(permissions)):
+    permissions[i] = permissions[i].split(',')
   header = permissions[0]
   for line in permissions:
     if line[0] == program_name.strip().lower():
-      return {header[i]:line[i] for i in range(len(header))}
+      return {header[i].strip():line[i].strip() for i in range(len(header))}
 
 
 
 def collect_privacy_info(filename):
   '''
-  Docstring for collect_privacy_info
+  Parses the file 'filename' and returns a list of identified types of data
+  ie. citizen's name, id number, mother's maiden name, etc.
   
   :param filename: Name of 
   :return: Description
@@ -65,11 +68,53 @@ def audit(permissions_filename, programs):
 
 
 
-
+'''
 if __name__ == "__main__":
-  num_programs = int(input("Enter the number of programs to be audited: "))
+  perms = input('Permissions File> ').strip()
+  num_programs = int(input("Number of Programs> "))
   names = []
   for i in range(num_programs):
-    names.append(input('Enter the name of a program: ').strip())
-  
-  
+    names.append(input(f'Name {i+1}> ').strip())
+'''
+
+
+
+
+#'''
+#get_perms test:
+program = 'quantum_cryptography_model'
+perms_filename = 'CSCI-128-Combined_Create_Project/CSCI-128-main/perms1.csv'
+permissions = get_perms(perms_filename, program)
+print(type(permissions))
+for key, entry in permissions.items():
+  print(key + ': ' + entry)    
+'''prints:
+{
+'Program Name':'quantum_cryptography_model',
+'Citizen Name':'Allowed',
+'ID Number':'Allowed',
+'Date of Birth':'Allowed',
+'Mothers Maiden Name':'Not Allowed',
+'Name of First Pet':'Not Allowed',
+'Social Score':'Not Allowed',
+'Credit Balance':'Not Allowed'
+}
+'''
+
+
+
+
+'''
+Main Test
+Inputs:
+Permissions File> perms1.csv
+Number of Programs> 1
+Name 1> quantum_cryptography_model
+
+
+Outputs:
+file: results.txt
+contents: 
+quantum_cryptography_model: Failed
+Unauthorized Data Type: Credit Balance
+'''

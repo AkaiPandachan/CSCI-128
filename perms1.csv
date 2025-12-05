@@ -1,2 +1,2 @@
-Program Name,Citizen Name,ID Number,Date of Birth,Mothers Maiden Name,Name of First Pet
-quantum_cryptography_model.py,Allowed,Allowed,Allowed,Not Allowed,Not Allowed
+Program Name,Citizen Name,ID Number,Date of Birth,Mothers Maiden Name,Name of First Pet,Social Score,Credit Balance
+quantum_cryptography_model,Allowed,Allowed,Allowed,Not Allowed,Not Allowed,Not Allowed,Not Allowed
